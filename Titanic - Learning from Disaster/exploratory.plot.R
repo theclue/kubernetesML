@@ -1,3 +1,5 @@
+require("Amelia")
+
 # Data breakdown
 
 op <- par(mfrow = c(2, 1))
@@ -9,5 +11,13 @@ barNest(Survived~Age.factor+Sex+Pclass,titanic.train,col=titanic.colors,showall=
 barNest(Survived~Age.factor+Sex+Pclass,titanic.train,col=titanic.colors,showall=TRUE,
         main="Passeggeri divisi per classe, età, sesso",ylab="Numero di passeggeri",
         FUN="valid.n",shrink=0.15)
+
+par(op)
+
+# Missmaps
+op <- par(mfrow = c(1, 2))
+
+missmap(titanic.train, main = "Valori non disponibili (Training)")
+missmap(titanic.test, main = "Valori non disponibili (Test)")
 
 par(op)
