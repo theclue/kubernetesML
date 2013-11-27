@@ -13,3 +13,6 @@ titanic.submit$Survived <- predict(forest.model1, titanic.test)
 titanic.submit <- as.data.frame(titanic.submit)
 levels(titanic.submit$Survived) <- c(0,1)
 titanic.submit$Survived <- as.integer(as.character(titanic.submit$Survived))
+
+write.csv(x=titanic.submit, file="./output/titanic_raw_rforest_submission.csv", row.names=FALSE, quote=FALSE)
+
