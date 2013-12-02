@@ -6,11 +6,11 @@ train.idx <- createDataPartition(titanic.train$Survived, p = .8, list = FALSE, t
 titanic.final.train <- titanic.train[train.idx,]
 titanic.final.test <- titanic.train[-train.idx,]
 
-forest.fitControl <- trainControl( method = "repeatedcv", number = 5,repeats = 5, summaryFunction = twoClassSummary, classProbs=TRUE) 
+forest.fitControl <- trainControl( method = "repeatedcv", number = 5, summaryFunction = twoClassSummary, classProbs=TRUE) 
 
-
-#forest.model1 <- train(Survived ~ Pclass + Age.factor + Sex + Title + SibSp +Parch +Embarked,
-forest.model1 <- train(Survived ~ .,
+registerDoParallel(makeCluster(6), cores=6)
+forest.model1 <- train(Survived ~ Pclass + Age.factor + Sex + Title + SibSp +Parch +Embarked,
+#forest.model1 <- train(Survived ~ .,
                        titanic.final.train,
                        trControl = forest.fitControl,
                        tuneLength=12,
