@@ -55,3 +55,6 @@ plot(as.numeric(dimnames(tab.male)$Fare), tab.male[2,], xlab = "Fare (Log)", yla
 par(op)
 
 plot(as.numeric(dimnames(tab)$Fare), tab[2,], xlab = "Fare (Log)", ylab = "Survived [%]", cex=.6)
+
+# Feature plot
+featurePlot(x = titanic.train[,6:8], y = titanic.train$Survived, plot="ellipse", auto.key = list(columns = 3)) 

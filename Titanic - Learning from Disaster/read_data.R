@@ -1,7 +1,7 @@
 require("plotrix")
 
 titanic.train <- read.csv2(file="./data/train.csv", header=TRUE, sep=",")
-titanic.test <- read.csv2(file="./data/test.csv", header=TRUE, sep=",")
+titanic.predict <- read.csv2(file="./data/test.csv", header=TRUE, sep=",")
 
 titanic.colors<-list("gray90",c("#0000ff","#7700ee","#aa00cc","#dd00aa"), c("#ddcc00","#ee9900"),c("pink","lightblue"))
 
@@ -39,36 +39,36 @@ levels(titanic.train$Sex)<- c('F', 'M')
 
 ### TEST SET
 
-titanic.test$Age <- as.integer(as.character(titanic.test$Age))
-titanic.test$Pclass <- as.factor(titanic.test$Pclass)
-titanic.test$Fare <- as.numeric(as.character(titanic.test$Fare))
-titanic.test$Cabin[which(titanic.test$Cabin == "")] <- NA
-titanic.test$Cabin <- as.character(titanic.test$Cabin)
-titanic.test$Deck <- (x=substr(titanic.test$Cabin, 0, 1))
-titanic.test$Deck[which(is.na(titanic.test$Deck))] <- "U"
-titanic.test$Deck <- factor(titanic.test$Deck)
+titanic.predict$Age <- as.integer(as.character(titanic.predict$Age))
+titanic.predict$Pclass <- as.factor(titanic.predict$Pclass)
+titanic.predict$Fare <- as.numeric(as.character(titanic.predict$Fare))
+titanic.predict$Cabin[which(titanic.predict$Cabin == "")] <- NA
+titanic.predict$Cabin <- as.character(titanic.predict$Cabin)
+titanic.predict$Deck <- (x=substr(titanic.predict$Cabin, 0, 1))
+titanic.predict$Deck[which(is.na(titanic.predict$Deck))] <- "U"
+titanic.predict$Deck <- factor(titanic.predict$Deck)
 
-titanic.test$Title <- "Other"
-titanic.test$Title[which(grepl(x=titanic.test$Name, pattern="Miss.", fixed=T))] <- "Miss"
-titanic.test$Title[which(grepl(x=titanic.test$Name, pattern="Mr.", fixed=T))] <- "Mr"
-titanic.test$Title[which(grepl(x=titanic.test$Name, pattern="Mrs.", fixed=T))] <- "Mrs"
-titanic.test$Title[which(grepl(x=titanic.test$Name, pattern="Master.", fixed=T))] <- "Master"
+titanic.predict$Title <- "Other"
+titanic.predict$Title[which(grepl(x=titanic.predict$Name, pattern="Miss.", fixed=T))] <- "Miss"
+titanic.predict$Title[which(grepl(x=titanic.predict$Name, pattern="Mr.", fixed=T))] <- "Mr"
+titanic.predict$Title[which(grepl(x=titanic.predict$Name, pattern="Mrs.", fixed=T))] <- "Mrs"
+titanic.predict$Title[which(grepl(x=titanic.predict$Name, pattern="Master.", fixed=T))] <- "Master"
 
-titanic.test$Age[which(is.na(titanic.test$Age) & titanic.test$Title == "Mrs")] <- round(mean(titanic.test$Age[which(titanic.test$Title == "Mrs")], na.rm=TRUE))
-titanic.test$Age[which(is.na(titanic.test$Age) & titanic.test$Title == "Mr")] <- round(mean(titanic.test$Age[which(titanic.test$Title == "Mr")], na.rm=TRUE))
-titanic.test$Age[which(is.na(titanic.test$Age) & titanic.test$Title == "Miss")] <- round(mean(titanic.test$Age[which(titanic.test$Title == "Miss")], na.rm=TRUE))
-titanic.test$Age[which(is.na(titanic.test$Age) & titanic.test$Title == "Master")] <- round(mean(titanic.test$Age[which(titanic.test$Title == "Master")], na.rm=TRUE))
-titanic.test$Age[which(is.na(titanic.test$Age) & titanic.test$Title == "Other")] <- round(mean(titanic.test$Age[which(titanic.test$Title == "Other")], na.rm=TRUE))
+titanic.predict$Age[which(is.na(titanic.predict$Age) & titanic.predict$Title == "Mrs")] <- round(mean(titanic.predict$Age[which(titanic.predict$Title == "Mrs")], na.rm=TRUE))
+titanic.predict$Age[which(is.na(titanic.predict$Age) & titanic.predict$Title == "Mr")] <- round(mean(titanic.predict$Age[which(titanic.predict$Title == "Mr")], na.rm=TRUE))
+titanic.predict$Age[which(is.na(titanic.predict$Age) & titanic.predict$Title == "Miss")] <- round(mean(titanic.predict$Age[which(titanic.predict$Title == "Miss")], na.rm=TRUE))
+titanic.predict$Age[which(is.na(titanic.predict$Age) & titanic.predict$Title == "Master")] <- round(mean(titanic.predict$Age[which(titanic.predict$Title == "Master")], na.rm=TRUE))
+titanic.predict$Age[which(is.na(titanic.predict$Age) & titanic.predict$Title == "Other")] <- round(mean(titanic.predict$Age[which(titanic.predict$Title == "Other")], na.rm=TRUE))
 
-titanic.test$isAlone <- factor(ifelse(titanic.test$Parch==0 & titanic.test$SibSp == 0, "Alone", "Not Alone"))
+titanic.predict$isAlone <- factor(ifelse(titanic.predict$Parch==0 & titanic.predict$SibSp == 0, "Alone", "Not Alone"))
 
-titanic.test$Age.factor <- factor(x=as.character(ifelse(titanic.test$Age<=12, "Child", "Adult")))
+titanic.predict$Age.factor <- factor(x=as.character(ifelse(titanic.predict$Age<=12, "Child", "Adult")))
 
 #levels(titanic.train$Survived)<- c('No', 'Yes')
-levels(titanic.test$Sex)<- c('F', 'M')
-#titanic.test$Survived <- as.factor(0)
+levels(titanic.predict$Sex)<- c('F', 'M')
+#titanic.predict$Survived <- as.factor(0)
 
 # Removing last missing
 titanic.train$Cabin <- NULL
-titanic.test$Cabin <- NULL
-titanic.test[is.na(titanic.test$Fare),]$Fare <- mean(titanic.test$Fare, na.rm=TRUE)
+titanic.predict$Cabin <- NULL
+titanic.predict[is.na(titanic.predict$Fare),]$Fare <- mean(titanic.predict$Fare, na.rm=TRUE)
