@@ -21,6 +21,15 @@ forest.model1 <- train(Survived ~ Pclass + Age.factor + Sex + Title + SibSp +Par
 titanic.final.test.predict <- predict(forest.model1, titanic.final.test)
 confusionMatrix(titanic.final.test.predict, titanic.final.test$Survived)
 
+# ROC Curve
+titanic.final.test.predict.prob <- predict(forest.model1, titanic.final.test, type="prob")
+result.roc.model1 <-  roc(titanic.final.test$survived, titanic.final.test.predict.prob$yes)
+plot(result.roc.model1, print.thres="best", print.thres.best.method="closest.topleft")
+
+result.coords.model1 <- coords(  result.roc.model1, "best", best.method="closest.topleft",
+                                 ret=c("threshold", "accuracy"))
+result.coords.model1
+
 
 titanic.submit <- NULL
 
