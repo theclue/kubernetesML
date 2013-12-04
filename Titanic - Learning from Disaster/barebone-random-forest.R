@@ -24,6 +24,8 @@ while(cores < 1 ){
 
 
 train.error.perc <- numeric()
+train.error.size <- numeric()
+test.error.perc <- numeric()
 
 
 for (i in 1:8) {
@@ -53,12 +55,15 @@ forest.model1 <- train(formula,
 
 confusion.train <- confusionMatrix(forest.model1)$table
 train.error.perc <- c(train.error.perc, confusion.train[1,2] + confusion.train[2,1])
-
-}
+train.error.size <- c(train.error.size, nrow(titanic.current.train)) 
 
 # Testset
 titanic.final.test.predict <- predict(forest.model1, titanic.final.test)
-confusionMatrix(titanic.final.test.predict, titanic.final.test$.outcome)
+confusion.test <- confusionMatrix(titanic.final.test.predict, titanic.final.test$.outcome)$table
+
+test.error.perc <- c(test.error.perc, confusion.test[1,2] + confusion.test[2,1])
+
+}
 
 # ROC Curve
 titanic.final.test.predict.prob <- predict(forest.model1, titanic.final.test, type="prob")
