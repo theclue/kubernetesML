@@ -1,4 +1,7 @@
+# install.packages(c("caret","reshape2","plyr","caTools"),dependencies=c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances"))
+
 require("plotrix")
+require("caTools")
 
 titanic.train <- read.csv2(file="./data/train.csv", header=TRUE, sep=",")
 titanic.predict <- read.csv2(file="./data/test.csv", header=TRUE, sep=",")

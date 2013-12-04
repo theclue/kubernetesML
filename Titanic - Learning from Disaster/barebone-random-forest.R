@@ -1,29 +1,68 @@
+require("doParallel")
 require("caret")
+require("doParallel")
+
+colnames(titanic.train)[2] <- ".outcome"
 
 set.seed(3456)
-train.idx <- createDataPartition(titanic.train$Survived, p = .8, list = FALSE, times=1)
+train.idx <- createDataPartition(titanic.train$.outcome, p = .8, list = FALSE, times=1)
 
 titanic.final.train <- titanic.train[train.idx,]
 titanic.final.test <- titanic.train[-train.idx,]
 
-forest.fitControl <- trainControl( method = "repeatedcv", number = 5, summaryFunction = twoClassSummary, classProbs=TRUE) 
+titanic.final.train.subset.folds <- createFolds(titanic.final.train$.outcome, k=8, list=FALSE)
 
-registerDoParallel(makeCluster(6), cores=6)
-forest.model1 <- train(Survived ~ Pclass + Age.factor + Sex + Title + SibSp +Parch +Embarked,
-#forest.model1 <- train(Survived ~ .,
-                       titanic.final.train,
+titanic.final.train <- cbind(titanic.final.train, titanic.final.train.subset.folds)
+
+cores <- 0
+
+while(cores < 1 ){
+  cores <- readline("Number of cores to be used: ")
+  cores <- ifelse(grepl("\\D",cores),-1,as.integer(cores))
+  if(is.na(cores)){break}  # breaks when hit enter
+}
+
+
+train.error.perc <- numeric()
+
+
+for (i in 1:8) {
+
+registerDoParallel(makeCluster(cores), cores=cores)
+
+titanic.current.train <- titanic.final.train[titanic.final.train$titanic.final.train.subset.folds <= i,]
+
+#formula <- as.formula(".outcome ~ Pclass + Age.factor + Sex + Title + SibSp +Parch +Embarked")
+formula <- as.formula(".outcome ~ Pclass + Age.factor + Sex + Title + SibSp + Parch +isAlone")
+
+forest.fitControl <- trainControl( method = "repeatedcv", repeats = 5, summaryFunction = twoClassSummary, classProbs=TRUE)
+#forest.fitControl <- trainControl(method = "repeatedcv", repeats = 5, classProbs=TRUE, returnResamp="all")
+forest.grid <- createGrid("rf", len=13, data=titanic.current.train)
+
+
+forest.model1 <- train(formula,
+                       method="rf",
+                       titanic.current.train,
                        trControl = forest.fitControl,
-                       tuneLength=12,
                        metric = "ROC",
+                       #metric = "Accuracy",
+                       tuneGrid = forest.grid,
                        importance=TRUE)
+
+# forest.model1$results
+
+confusion.train <- confusionMatrix(forest.model1)$table
+train.error.perc <- c(train.error.perc, confusion.train[1,2] + confusion.train[2,1])
+
+}
 
 # Testset
 titanic.final.test.predict <- predict(forest.model1, titanic.final.test)
-confusionMatrix(titanic.final.test.predict, titanic.final.test$Survived)
+confusionMatrix(titanic.final.test.predict, titanic.final.test$.outcome)
 
 # ROC Curve
 titanic.final.test.predict.prob <- predict(forest.model1, titanic.final.test, type="prob")
-result.roc.model1 <-  roc(titanic.final.test$survived, titanic.final.test.predict.prob$yes)
+result.roc.model1 <-  roc(titanic.final.test$.outcome, titanic.final.test.predict.prob$yes)
 plot(result.roc.model1, print.thres="best", print.thres.best.method="closest.topleft")
 
 result.coords.model1 <- coords(  result.roc.model1, "best", best.method="closest.topleft",
@@ -40,5 +79,5 @@ titanic.submit <- as.data.frame(titanic.submit)
 levels(titanic.submit$Survived) <- c(0,1)
 titanic.submit$Survived <- as.integer(as.character(titanic.submit$Survived))
 
-write.csv(x=titanic.submit, file="./output/titanic_mtry5_rforest_submission.csv", row.names=FALSE, quote=FALSE)
+write.csv(x=titanic.submit, file="./output/titanic_mtry2_rforest_submission.csv", row.names=FALSE, quote=FALSE)
 
