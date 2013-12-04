@@ -65,6 +65,8 @@ test.error.perc <- c(test.error.perc, confusion.test[1,2] + confusion.test[2,1])
 
 }
 
+learning.curve <- cbind(train.error.size, train.error.perc, test.error.perc)
+
 # ROC Curve
 titanic.final.test.predict.prob <- predict(forest.model1, titanic.final.test, type="prob")
 result.roc.model1 <-  roc(titanic.final.test$.outcome, titanic.final.test.predict.prob$yes)
