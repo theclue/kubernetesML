@@ -28,7 +28,7 @@ train.error.size <- numeric()
 test.error.perc <- numeric()
 
 
-for (i in 1:8) {
+for (i in 8:8) {
 
 registerDoParallel(makeCluster(cores), cores=cores)
 
@@ -66,19 +66,14 @@ test.error.perc <- c(test.error.perc, confusion.test[1,2] + confusion.test[2,1])
 
 }
 
-<<<<<<< HEAD
-learning.curve <- cbind(train.error.size, train.error.perc, test.error.perc)
-=======
 learning.curve <- as.data.frame(cbind(train.error.size, train.error.perc, test.error.perc))
 
 extractPrediction(list(forest.model1))
 
 
->>>>>>> 5e6438240830617be17d84e9f38cf7dbe8112872
-
 # ROC Curve
 titanic.final.test.predict.prob <- predict(forest.model1, titanic.final.test, type="prob")
-result.roc.model1 <-  roc(titanic.final.test$.outcome, titanic.final.test.predict.prob$yes)
+result.roc.model1 <-  roc(titanic.final.test$.outcome, titanic.final.test.predict.prob$Yes)
 plot(result.roc.model1, print.thres="best", print.thres.best.method="closest.topleft")
 
 result.coords.model1 <- coords(  result.roc.model1, "best", best.method="closest.topleft",
