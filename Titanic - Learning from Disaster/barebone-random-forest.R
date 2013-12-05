@@ -12,7 +12,7 @@ titanic.final.test <- titanic.train[-train.idx,]
 
 titanic.final.train.subset.folds <- createFolds(titanic.final.train$.outcome, k=8, list=FALSE)
 
-titanic.final.train <- cbind(titanic.final.train, titanic.final.train.subset.folds)
+#titanic.final.train <- cbind(titanic.final.train, titanic.final.train.subset.folds)
 
 cores <- 0
 
@@ -32,12 +32,12 @@ for (i in 1:8) {
 
 registerDoParallel(makeCluster(cores), cores=cores)
 
-titanic.current.train <- titanic.final.train[titanic.final.train$titanic.final.train.subset.folds <= i,]
+titanic.current.train <- titanic.final.train[titanic.final.train.subset.folds <= i,]
 
 #formula <- as.formula(".outcome ~ Pclass + Age.factor + Sex + Title + SibSp +Parch +Embarked")
 formula <- as.formula(".outcome ~ Pclass + Age.factor + Sex + Title + SibSp + Parch +isAlone")
 
-forest.fitControl <- trainControl( method = "repeatedcv", repeats = 5, summaryFunction = twoClassSummary, classProbs=TRUE)
+forest.fitControl <- trainControl( method = "repeatedcv", repeats = 5, summaryFunction = twoClassSummary, classProbs=TRUE, returnData=TRUE, seeds=NULL, savePredictions=TRUE, returnResamp="all")
 #forest.fitControl <- trainControl(method = "repeatedcv", repeats = 5, classProbs=TRUE, returnResamp="all")
 forest.grid <- createGrid("rf", len=13, data=titanic.current.train)
 
@@ -49,6 +49,7 @@ forest.model1 <- train(formula,
                        metric = "ROC",
                        #metric = "Accuracy",
                        tuneGrid = forest.grid,
+                       fitBest = FALSE,
                        importance=TRUE)
 
 # forest.model1$results
@@ -64,6 +65,12 @@ confusion.test <- confusionMatrix(titanic.final.test.predict, titanic.final.test
 test.error.perc <- c(test.error.perc, confusion.test[1,2] + confusion.test[2,1])
 
 }
+
+learning.curve <- as.data.frame(cbind(train.error.size, train.error.perc, test.error.perc))
+
+extractPrediction(list(forest.model1))
+
+
 
 # ROC Curve
 titanic.final.test.predict.prob <- predict(forest.model1, titanic.final.test, type="prob")
