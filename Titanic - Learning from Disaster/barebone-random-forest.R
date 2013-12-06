@@ -1,6 +1,4 @@
-require("doParallel")
 require("caret")
-require("doParallel")
 
 colnames(titanic.train)[2] <- ".outcome"
 
@@ -12,25 +10,12 @@ titanic.final.test <- titanic.train[-train.idx,]
 
 titanic.final.train.subset.folds <- createFolds(titanic.final.train$.outcome, k=8, list=FALSE)
 
-#titanic.final.train <- cbind(titanic.final.train, titanic.final.train.subset.folds)
-
-cores <- 0
-
-while(cores < 1 ){
-  cores <- readline("Number of cores to be used: ")
-  cores <- ifelse(grepl("\\D",cores),-1,as.integer(cores))
-  if(is.na(cores)){break}  # breaks when hit enter
-}
-
-
 train.error.perc <- numeric()
 train.error.size <- numeric()
 test.error.perc <- numeric()
 
 
 for (i in 8:8) {
-
-registerDoParallel(makeCluster(cores), cores=cores)
 
 titanic.current.train <- titanic.final.train[titanic.final.train.subset.folds <= i,]
 
@@ -51,8 +36,6 @@ forest.model1 <- train(formula,
                        tuneGrid = forest.grid,
                        fitBest = FALSE,
                        importance=TRUE)
-
-# forest.model1$results
 
 confusion.train <- confusionMatrix(forest.model1)$table
 train.error.perc <- c(train.error.perc, confusion.train[1,2] + confusion.train[2,1])
