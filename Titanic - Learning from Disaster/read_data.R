@@ -1,7 +1,7 @@
 require("caTools")
 
-download.file("https://dl.dropboxusercontent.com/s/c5g620o0xjy7w1m/train.csv?dl=1&token_hash=AAEcnKaFFiX5kr0IHzBSOrbxEBWOHAVcBOQwiic0jZM0_g", destfile="./data/train.csv", method="curl", quiet = FALSE, mode = "w")
-download.file("https://dl.dropboxusercontent.com/s/g6b7gsrj5q5ovtv/test.csv?dl=1&token_hash=AAEzqgvsMWZcV5DBFDjwMUsQWRLmGwqERR16M8VQFxstqA", destfile="./data/test.csv", method="curl", quiet = FALSE, mode = "w")
+#download.file("https://dl.dropboxusercontent.com/s/c5g620o0xjy7w1m/train.csv?dl=1&token_hash=AAEcnKaFFiX5kr0IHzBSOrbxEBWOHAVcBOQwiic0jZM0_g", destfile="./data/train.csv", method="curl", quiet = FALSE, mode = "w")
+#download.file("https://dl.dropboxusercontent.com/s/g6b7gsrj5q5ovtv/test.csv?dl=1&token_hash=AAEzqgvsMWZcV5DBFDjwMUsQWRLmGwqERR16M8VQFxstqA", destfile="./data/test.csv", method="curl", quiet = FALSE, mode = "w")
 
 
 titanic.train <- read.csv2(file="./data/train.csv", header=TRUE, sep=",")
@@ -9,10 +9,13 @@ titanic.predict <- read.csv2(file="./data/test.csv", header=TRUE, sep=",")
 
 ##### TRAINING SET
 
+titanic.train$Name <- as.character(titanic.train$Name)
+titanic.train$Ticket <- as.character(titanic.train$Ticket)
+
 titanic.train$Age <- as.integer(as.character(titanic.train$Age))
 titanic.train$Pclass <- as.factor(titanic.train$Pclass)
 titanic.train$Survived <- as.factor(titanic.train$Survived)
-titanic.train$Fare <- as.numeric(as.character(titanic.train$Fare))
+titanic.train$Fare <- as.integer(log(as.numeric(as.character(titanic.train$Fare))+1))
 titanic.train$Cabin[which(titanic.train$Cabin == "")] <- NA
 titanic.train$Cabin <- as.character(titanic.train$Cabin)
 titanic.train$Deck <- (x=substr(titanic.train$Cabin, 0, 1))
@@ -24,6 +27,7 @@ titanic.train$Title[which(grepl(x=titanic.train$Name, pattern="Miss.", fixed=T))
 titanic.train$Title[which(grepl(x=titanic.train$Name, pattern="Mr.", fixed=T))] <- "Mr"
 titanic.train$Title[which(grepl(x=titanic.train$Name, pattern="Mrs.", fixed=T))] <- "Mrs"
 titanic.train$Title[which(grepl(x=titanic.train$Name, pattern="Master.", fixed=T))] <- "Master"
+titanic.train$Title <- as.factor(titanic.train$Title)
 
 titanic.train$Age[which(is.na(titanic.train$Age) & titanic.train$Title == "Mrs")] <- round(mean(titanic.train$Age[which(titanic.train$Title == "Mrs")], na.rm=TRUE))
 titanic.train$Age[which(is.na(titanic.train$Age) & titanic.train$Title == "Mr")] <- round(mean(titanic.train$Age[which(titanic.train$Title == "Mr")], na.rm=TRUE))
@@ -41,9 +45,13 @@ levels(titanic.train$Sex)<- c('F', 'M')
 
 ### TEST SET
 
+
+titanic.predict$Name <- as.character(titanic.predict$Name)
+titanic.predict$Ticket <- as.character(titanic.predict$Ticket)
+
 titanic.predict$Age <- as.integer(as.character(titanic.predict$Age))
 titanic.predict$Pclass <- as.factor(titanic.predict$Pclass)
-titanic.predict$Fare <- as.numeric(as.character(titanic.predict$Fare))
+titanic.predict$Fare <- as.integer(log(as.numeric(as.character(titanic.predict$Fare))+1))
 titanic.predict$Cabin[which(titanic.predict$Cabin == "")] <- NA
 titanic.predict$Cabin <- as.character(titanic.predict$Cabin)
 titanic.predict$Deck <- (x=substr(titanic.predict$Cabin, 0, 1))
@@ -55,6 +63,7 @@ titanic.predict$Title[which(grepl(x=titanic.predict$Name, pattern="Miss.", fixed
 titanic.predict$Title[which(grepl(x=titanic.predict$Name, pattern="Mr.", fixed=T))] <- "Mr"
 titanic.predict$Title[which(grepl(x=titanic.predict$Name, pattern="Mrs.", fixed=T))] <- "Mrs"
 titanic.predict$Title[which(grepl(x=titanic.predict$Name, pattern="Master.", fixed=T))] <- "Master"
+titanic.predict$Title <- as.factor(titanic.predict$Title)
 
 titanic.predict$Age[which(is.na(titanic.predict$Age) & titanic.predict$Title == "Mrs")] <- round(mean(titanic.predict$Age[which(titanic.predict$Title == "Mrs")], na.rm=TRUE))
 titanic.predict$Age[which(is.na(titanic.predict$Age) & titanic.predict$Title == "Mr")] <- round(mean(titanic.predict$Age[which(titanic.predict$Title == "Mr")], na.rm=TRUE))
@@ -76,3 +85,6 @@ titanic.predict$Cabin <- NULL
 titanic.predict[is.na(titanic.predict$Fare),]$Fare <- mean(titanic.predict$Fare, na.rm=TRUE)
 
 rm(x)
+
+# BUG!
+titanic.predict$Fare <- as.integer(titanic.predict$Fare)
