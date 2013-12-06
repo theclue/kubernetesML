@@ -37,14 +37,13 @@ titanic.train$Age[which(is.na(titanic.train$Age) & titanic.train$Title == "Other
 
 titanic.train$Age.factor <- factor(x=as.character(ifelse(titanic.train$Age<=12, "Child", "Adult")))
 
-titanic.train$isAlone <- factor(ifelse(titanic.train$Parch==0 & titanic.train$SibSp == 0, "Alone", "Not Alone"))
+titanic.train$isAlone <- factor(ifelse(titanic.train$Parch==0 & titanic.train$SibSp == 0, "Alone", "NotAlone"))
 
 # Relabel some factors for exploratory analysis
 levels(titanic.train$Survived)<- c('No', 'Yes')
 levels(titanic.train$Sex)<- c('F', 'M')
 
 ### TEST SET
-
 
 titanic.predict$Name <- as.character(titanic.predict$Name)
 titanic.predict$Ticket <- as.character(titanic.predict$Ticket)
@@ -71,7 +70,7 @@ titanic.predict$Age[which(is.na(titanic.predict$Age) & titanic.predict$Title == 
 titanic.predict$Age[which(is.na(titanic.predict$Age) & titanic.predict$Title == "Master")] <- round(mean(titanic.predict$Age[which(titanic.predict$Title == "Master")], na.rm=TRUE))
 titanic.predict$Age[which(is.na(titanic.predict$Age) & titanic.predict$Title == "Other")] <- round(mean(titanic.predict$Age[which(titanic.predict$Title == "Other")], na.rm=TRUE))
 
-titanic.predict$isAlone <- factor(ifelse(titanic.predict$Parch==0 & titanic.predict$SibSp == 0, "Alone", "Not Alone"))
+titanic.predict$isAlone <- factor(ifelse(titanic.predict$Parch==0 & titanic.predict$SibSp == 0, "Alone", "NotAlone"))
 
 titanic.predict$Age.factor <- factor(x=as.character(ifelse(titanic.predict$Age<=12, "Child", "Adult")))
 
@@ -82,6 +81,8 @@ levels(titanic.predict$Sex)<- c('F', 'M')
 # Removing last missing
 titanic.train$Cabin <- NULL
 titanic.predict$Cabin <- NULL
-titanic.predict[is.na(titanic.predict$Fare),]$Fare <- mean(titanic.predict$Fare, na.rm=TRUE)
+titanic.predict[is.na(titanic.predict$Fare.log),]$Fare.log <- 0
+
+colnames(titanic.train)[2] <- ".outcome"
 
 rm(x)
