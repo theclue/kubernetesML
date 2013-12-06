@@ -15,7 +15,7 @@ titanic.train$Ticket <- as.character(titanic.train$Ticket)
 titanic.train$Age <- as.integer(as.character(titanic.train$Age))
 titanic.train$Pclass <- as.factor(titanic.train$Pclass)
 titanic.train$Survived <- as.factor(titanic.train$Survived)
-titanic.train$Fare <- as.integer(log(as.numeric(as.character(titanic.train$Fare))+1))
+titanic.train$Fare.log <- round(log(as.numeric(as.character(titanic.train$Fare))+1), digits=2)
 titanic.train$Cabin[which(titanic.train$Cabin == "")] <- NA
 titanic.train$Cabin <- as.character(titanic.train$Cabin)
 titanic.train$Deck <- (x=substr(titanic.train$Cabin, 0, 1))
@@ -51,7 +51,7 @@ titanic.predict$Ticket <- as.character(titanic.predict$Ticket)
 
 titanic.predict$Age <- as.integer(as.character(titanic.predict$Age))
 titanic.predict$Pclass <- as.factor(titanic.predict$Pclass)
-titanic.predict$Fare <- as.integer(log(as.numeric(as.character(titanic.predict$Fare))+1))
+titanic.predict$Fare.log <- round(log(as.numeric(as.character(titanic.predict$Fare))+1), digits=2)
 titanic.predict$Cabin[which(titanic.predict$Cabin == "")] <- NA
 titanic.predict$Cabin <- as.character(titanic.predict$Cabin)
 titanic.predict$Deck <- (x=substr(titanic.predict$Cabin, 0, 1))
@@ -85,6 +85,3 @@ titanic.predict$Cabin <- NULL
 titanic.predict[is.na(titanic.predict$Fare),]$Fare <- mean(titanic.predict$Fare, na.rm=TRUE)
 
 rm(x)
-
-# BUG!
-titanic.predict$Fare <- as.integer(titanic.predict$Fare)
