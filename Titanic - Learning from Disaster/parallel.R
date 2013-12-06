@@ -18,3 +18,5 @@ if(.Platform$OS.type == "unix") {
 }
 
 writeLines(paste("Running on",.Platform$OS.type))
+
+rm(usable.cores)

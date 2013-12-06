@@ -1,12 +1,11 @@
-# install.packages(c("caret","reshape2","plyr","caTools"),dependencies=c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances"))
-
-require("plotrix")
 require("caTools")
+
+download.file("https://dl.dropboxusercontent.com/s/c5g620o0xjy7w1m/train.csv?dl=1&token_hash=AAEcnKaFFiX5kr0IHzBSOrbxEBWOHAVcBOQwiic0jZM0_g", destfile="./data/train.csv", method="curl", quiet = FALSE, mode = "w")
+download.file("https://dl.dropboxusercontent.com/s/g6b7gsrj5q5ovtv/test.csv?dl=1&token_hash=AAEzqgvsMWZcV5DBFDjwMUsQWRLmGwqERR16M8VQFxstqA", destfile="./data/test.csv", method="curl", quiet = FALSE, mode = "w")
+
 
 titanic.train <- read.csv2(file="./data/train.csv", header=TRUE, sep=",")
 titanic.predict <- read.csv2(file="./data/test.csv", header=TRUE, sep=",")
-
-titanic.colors<-list("gray90",c("#0000ff","#7700ee","#aa00cc","#dd00aa"), c("#ddcc00","#ee9900"),c("pink","lightblue"))
 
 ##### TRAINING SET
 
@@ -75,3 +74,5 @@ levels(titanic.predict$Sex)<- c('F', 'M')
 titanic.train$Cabin <- NULL
 titanic.predict$Cabin <- NULL
 titanic.predict[is.na(titanic.predict$Fare),]$Fare <- mean(titanic.predict$Fare, na.rm=TRUE)
+
+rm(x)

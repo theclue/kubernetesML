@@ -1,7 +1,11 @@
 require("Amelia")
 require("plotrix")
 
+titanic.colors<-list("gray90",c("#0000ff","#7700ee","#aa00cc","#dd00aa"), c("#ddcc00","#ee9900"),c("pink","lightblue"))
+
 # Data breakdown
+
+
 
 op <- par(mfrow = c(2, 1))
 
