@@ -1,6 +1,10 @@
 # This script initialized the parallel processing depending of OS and system resources
 
+require("parallel")
+
 usable.cores <- detectCores(all.tests = FALSE, logical = FALSE)-1
+
+writeLines(paste("Available cores: ", usable.cores))
 
 if(.Platform$OS.type == "unix") {
   # Linux
@@ -11,6 +15,6 @@ if(.Platform$OS.type == "unix") {
   # Windows
   require("doParallel")
   registerDoParallel(makeCluster(usable.cores), cores=usable.cores)
-  
- 
 }
+
+writeLines(paste("Running on",.Platform$OS.type))
