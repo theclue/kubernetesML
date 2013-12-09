@@ -2,7 +2,7 @@
 
 require("parallel")
 
-usable.cores <- detectCores(all.tests = TRUE, logical = TRUE)-1
+usable.cores <- detectCores(all.tests = FALSE, logical = TRUE)-1
 
 writeLines(paste("Available cores: ", usable.cores))
 
