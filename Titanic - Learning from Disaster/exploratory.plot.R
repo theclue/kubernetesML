@@ -62,3 +62,4 @@ plot(as.numeric(dimnames(tab)$Fare), tab[2,], xlab = "Fare (Log)", ylab = "Survi
 
 # Feature plot
 featurePlot(x = titanic.train[,6:8], y = titanic.train$Survived, plot="ellipse", auto.key = list(columns = 3)) 
+
