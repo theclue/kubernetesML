@@ -61,6 +61,9 @@ model.posts$plain.Body <- (
     )
   )
 
+model.posts$plain.Body <- gsub("\\s+", " ", gsub("[[:cntrl:]]", " ", model.posts$plain.Body))
+
+
 # TODO: remove signatures
 
 model.posts <- model.posts[,!(names(model.posts) %in% c("X", "Body"))]
@@ -77,6 +80,8 @@ model.posts <- merge(x=
                by.y="ID",
                all.x=TRUE
 )
+
+model.posts$Year <- substr(model.posts$DT, 0, 4)
 
 ############################
 # Corpus Creation
@@ -96,8 +101,9 @@ model.corpus <- Corpus(
   )
 
 # Corpus preprocessing
-model.corpus <- tm_map(model.corpus, tolower)
-model.corpus <- tm_map(model.corpus, stripWhitespace)
+model.corpus <- tm_map(model.corpus, content_transformer(tolower))
+model.corpus <- tm_map(model.corpus, content_transformer(stripWhitespace))
+
 model.corpus <-  tm_map(model.corpus, PlainTextDocument)
 
 # Metadata
