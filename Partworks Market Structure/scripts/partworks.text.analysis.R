@@ -7,12 +7,17 @@
 ############################
 # Prerequisites
 #####
+setwd("./Partworks Market Structure")
+
 require("tm")
 require("RCurl")
 require("reshap")
 require("wordcloud")
+require("ggplot2")
 
 # Get the lexicons, then add some words with high contextual discriminativer power
+
+# TODO: remove "issue" and "issues" as they could have not a negative meaning in the partworks scenario
 neg.lexicon <- c(scan(
   textConnection(
     getURL("https://raw2.github.com/SocialMediaMininginR/neg_words/master/negative-words.txt")
@@ -28,6 +33,8 @@ pos.lexicon <- scan(
   what = "character",
   comment.char = ";"
 )
+
+https.Load("https://raw2.github.com/SocialMediaMininginR/sentiment_function/master/sentiment.R")
 
 ############################
 # Preliminary Analysis
@@ -93,4 +100,34 @@ wordcloud(model.rsum.df$word,
 #####
 model.buzz <- cast(melt(model.posts), model ~ Year, length)
 
+model.score <- score.sentiment(model.posts$plain.Body, pos.lexicon, neg.lexicon, .progress = "text")
 
+model.posts <- cbind(model.posts, model.score$score)
+
+colnames(model.posts) <- c("Thread.ID", "Post.Num", "Post.Author", "Post.Datetime", "Post.Body", "Post.Title", "Involved.Model", "Post.Year", "Post.Score")
+
+# TODO: This pivot actually won't work...
+#cast(melt(model.posts), Involved.Model ~ Post.Year, value = "Post.Score", fun.aggregate = mean, fill = 0)
+
+# Since the casting won't work, let's degradate to  the good ok' ggplot2...
+model.boxplot <- ggplot(model.posts, 
+                        aes(x = model.posts$Post.Year, y= model.posts$Post.Score)) +
+                        geom_boxplot(aes(fill = model.posts$Post.Year),
+                                     outlier.colour = "black",
+                                     outlier.shape = 16,
+                                     outlier.size = 2) +
+                        xlab("Year") +
+                        ylab("Sentiment") +
+                        ggtitle("Partworks Modelling - Sentiment over time")
+
+model.boxplot.kit <- ggplot(model.posts, 
+                        aes(x = model.posts$Involved.Model, y= model.posts$Post.Score)) +
+  geom_boxplot(aes(fill = model.posts$Involved.Model),
+               outlier.colour = "black",
+               outlier.shape = 16,
+               outlier.size = 2) +
+  xlab("Year") +
+  ylab("Sentiment") +
+  ggtitle("Partworks Modelling - by Kit")
+
+s3.saveData(model.posts, output.dir = "./tableau")
