@@ -44,6 +44,7 @@ rownames(model.posts) <- model.posts$X
 rownames(model.threads) <- model.threads$X
 
 # Remove quoted text, then convert to plain text
+# TODO: if the user has a space or number as username, the blockquoted text is not parsed
 model.posts$plain.Body <- (
   unlist(
     lapply(
