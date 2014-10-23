@@ -40,7 +40,7 @@ https.Load("https://raw2.github.com/SocialMediaMininginR/sentiment_function/mast
 # Preliminary Analysis
 #####
 
-# Some non-discriminative words are added by rule of thumb
+# Some non-discriminative words are added eyeballing
 model.stopwords <- unique(c(
   stopwords("SMART"), 
   stopwords("english"),
