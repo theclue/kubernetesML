@@ -6,9 +6,13 @@
 ###########
 
 s3.loadData <- function(file, repo = "http://s3.amazonaws.com/extras.gabrielebaldassarre.com/datascience", input.dir = NULL, output.dir = "./data", overwrite = FALSE, ...){
-  
+    
   require("tools")
+  require("RCurl")
   
+  file.path <- paste(paste(repo, paste(input.dir, collapse="/"), sep="/"), file, sep="/")
+  file.md5 <- paste(file.path, "md5", sep=".")
+    
   # Create output.dir if it doesn't exists
   if(!file.exists(output.dir)) {
     dir.create(file.path(".", output.dir))
@@ -19,9 +23,9 @@ s3.loadData <- function(file, repo = "http://s3.amazonaws.com/extras.gabrielebal
   if (
     overwrite || 
     (!file.exists(paste(output.dir, file, sep="/"))) || 
-    (read.table(textConnection(getURL(paste(paste(repo, paste(input.dir, collapse="/"), sep="/"), paste(file, "md5", sep="."), sep="/"))), sep=",", header=FALSE)[1] != (md5sum(paste(output.dir, file, sep="/"))))
+    (read.table(textConnection(getURL(file.md5)), sep=",", header=FALSE)[1] != (md5sum(paste(output.dir, file, sep="/"))))
     ) {
-    download.file(paste(paste(repo, paste(input.dir, collapse="/"), sep="/"), file, sep="/"), paste(output.dir, file, sep="/"))
+    download.file(file.path, paste(output.dir, file, sep="/"))
   }
         
     # If file is an archive, uncompress it before loading
