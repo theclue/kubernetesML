@@ -9,8 +9,7 @@
 #####
 setwd("./Partworks Market Structure")
 
-require("koRpus")
-require("SnowballC")
+require("tm")
 require("plyr")
 require("tm.plugin.webmining")
 
