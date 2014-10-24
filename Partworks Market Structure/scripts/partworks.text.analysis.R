@@ -11,7 +11,7 @@ setwd("./Partworks Market Structure")
 
 require("tm")
 require("RCurl")
-require("reshap")
+require("reshape")
 require("wordcloud")
 require("ggplot2")
 
@@ -45,7 +45,7 @@ pos.lexicon <- scan(
 model.stopwords <- unique(c(
   stopwords("SMART"), 
   stopwords("english"),
-  "model", "wrote", "dont", "forum", "post", "mclaren", "victory", "cheers", "tomick", "mike", "deagostini",
+  "dont", "forum", "post", "mclaren", "victory", "cheers", "tomick", "mike", "deagostini",
   "deag", "models", "john", "email", "isnt", "yamato", "youll", "agostini", "tamiya", "endeavour", "admin"))
 
 # For some reason, controlling stopwords won't work, so a term clean corpus is built
