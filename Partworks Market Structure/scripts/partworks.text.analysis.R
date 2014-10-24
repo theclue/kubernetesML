@@ -15,6 +15,8 @@ require("reshap")
 require("wordcloud")
 require("ggplot2")
 
+source("../common/score.sentiment.R")
+
 # Get the lexicons, then add some words with high contextual discriminativer power
 
 # TODO: remove "issue" and "issues" as they could have not a negative meaning in the partworks scenario
@@ -34,7 +36,6 @@ pos.lexicon <- scan(
   comment.char = ";"
 )
 
-https.Load("https://raw2.github.com/SocialMediaMininginR/sentiment_function/master/sentiment.R")
 
 ############################
 # Preliminary Analysis
