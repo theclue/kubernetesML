@@ -9,7 +9,6 @@
 #####
 setwd("./Partworks Market Structure")
 
-require("tm")
 require("koRpus")
 require("SnowballC")
 require("plyr")
@@ -20,8 +19,6 @@ require("rJava")
 
 # TODO it's needed on Linux, but it gets Windows processing slowly
 options(mc.cores=1)
-
-require("RWeka")
 
 source("../common/cSplit.R")
 source("../common/s3.loadData.R")
@@ -39,31 +36,33 @@ model.threads <- s3.loadData(file="model.threads.csv.zip", input.dir="partworks"
 # --------------------
 #####
 
-# Assure the row.names is the index of the file
+# Assure the row.names column is the index of the file
 rownames(model.posts) <- model.posts$X
 rownames(model.threads) <- model.threads$X
 
 # Remove quoted text, then convert to plain text
-# TODO: if the user has a space or number as username, the blockquoted text is not parsed
-model.posts$plain.Body <- (
-  unlist(
-    lapply(
-      model.posts$Body, function(x)
-        gsub("^\\s+|\\s+$", "", 
-             extractHTMLStrip(
-               gsub("(<DIV class=quote><B>[\\w]+\\s*wrote:<\\/B>\\s*<DIV class=innerquote>).*?(<\\/DIV><\\/DIV>)", "", 
-                    gsub("(?<=[.,!?()])(?! )", " ", 
-                         gsub("<BR>|<\\/LI>|<\\/BR>", " ", x, perl=TRUE, ignore.case = TRUE)
-                         , perl=TRUE)
-                    , perl=TRUE, ignore.case = TRUE)
-               )
-             )
-      )
-    )
-  )
-
-model.posts$plain.Body <- gsub("\\s+", " ", gsub("[[:cntrl:]]", " ", model.posts$plain.Body))
-
+model.posts$plain.Body <- 
+  # Remove leading and training spaces
+  gsub("^\\s+|\\s+$", "",
+       # Fix the elision character kern
+       gsub("('|’)\\h*(t|m|ll|re)", "'\\2",
+       # Clean the space before and after punctuations
+       gsub("(?:[a-z]-[a-z])(*SKIP)(*F)|(?<!\\d)\\h*(\\p{P}+)\\h*(?!\\d)", "\\1 ",
+            unlist(
+              lapply(
+                model.posts$Body, function(x)
+                  extractHTMLStrip(
+                    # Greedly remove blockquoted paragraphs
+                    gsub("(<DIV class=quote><B>(.*)?\\s*wrote:<\\/B>\\s*<DIV class=innerquote>).*?(<\\/DIV><\\/DIV>)", "", 
+                         # Replace HTML Newline with a space
+                         gsub("<BR>|<\\/LI>|<\\/BR>", " ", x, perl=TRUE, ignore.case = TRUE),
+                         perl = TRUE,
+                         ignore.case = TRUE)
+                  )
+              )
+            ), perl=TRUE
+       ), perl = TRUE
+  ), perl=TRUE)
 
 # TODO: remove signatures
 
