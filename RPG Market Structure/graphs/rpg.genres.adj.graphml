@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+         http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+<!-- Created by igraph -->
+  <key id="v_name" for="node" attr.name="name" attr.type="string"/>
+  <key id="v_label" for="node" attr.name="label" attr.type="string"/>
+  <key id="e_weight" for="edge" attr.name="weight" attr.type="double"/>
+  <graph id="G" edgedefault="undirected">
+    <node id="n0">
+      <data key="v_name">Action</data>
+      <data key="v_label">Action</data>
+    </node>
+    <node id="n1">
+      <data key="v_name">Animal</data>
+      <data key="v_label">Animal</data>
+    </node>
+    <node id="n2">
+      <data key="v_name">Anime</data>
+      <data key="v_label">Anime</data>
+    </node>
+    <node id="n3">
+      <data key="v_name">Apocalyptic</data>
+      <data key="v_label">Apocalyptic</data>
+    </node>
+    <node id="n4">
+      <data key="v_name">Arthurian</data>
+      <data key="v_label">Arthurian</data>
+    </node>
+    <node id="n5">
+      <data key="v_name">Baseball</data>
+      <data key="v_label">Baseball</data>
+    </node>
+    <node id="n6">
+      <data key="v_name">Biblical</data>
+      <data key="v_label">Biblical</data>
+    </node>
+    <node id="n7">
+      <data key="v_name">Christian</data>
+      <data key="v_label">Christian</data>
+    </node>
+    <node id="n8">
+      <data key="v_name">Comedy</data>
+      <data key="v_label">Comedy</data>
+    </node>
+    <node id="n9">
+      <data key="v_name">Crime</data>
+      <data key="v_label">Crime</data>
+    </node>
+    <node id="n10">
+      <data key="v_name">Cthulhu</data>
+      <data key="v_label">Cthulhu</data>
+    </node>
+    <node id="n11">
+      <data key="v_name">Cyberpunk</data>
+      <data key="v_label">Cyberpunk</data>
+    </node>
+    <node id="n12">
+      <data key="v_name">Dark</data>
+      <data key="v_label">Dark</data>
+    </node>
+    <node id="n13">
+      <data key="v_name">Dystopian</data>
+      <data key="v_label">Dystopian</data>
+    </node>
+    <node id="n14">
+      <data key="v_name">Espionage</data>
+      <data key="v_label">Espionage</data>
+    </node>
+    <node id="n15">
+      <data key="v_name">Fairy Tale</data>
+      <data key="v_label">Fairy Tale</data>
+    </node>
+    <node id="n16">
+      <data key="v_name">Fantasy</data>
+      <data key="v_label">Fantasy</data>
+    </node>
+    <node id="n17">
+      <data key="v_name">Fiction</data>
+      <data key="v_label">Fiction</data>
+    </node>
+    <node id="n18">
+      <data key="v_name">Gonzo</data>
+      <data key="v_label">Gonzo</data>
+    </node>
+    <node id="n19">
+      <data key="v_name">Gothic</data>
+      <data key="v_label">Gothic</data>
+    </node>
+    <node id="n20">
+      <data key="v_name">Historical</data>
+      <data key="v_label">Historical</data>
+    </node>
+    <node id="n21">
+      <data key="v_name">HKAC</data>
+      <data key="v_label">HKAC</data>
+    </node>
+    <node id="n22">
+      <data key="v_name">Horror</data>
+      <data key="v_label">Horror</data>
+    </node>
+    <node id="n23">
+      <data key="v_name">Humor</data>
+      <data key="v_label">Humor</data>
+    </node>
+    <node id="n24">
+      <data key="v_name">Low</data>
+      <data key="v_label">Low</data>
+    </node>
+    <node id="n25">
+      <data key="v_name">Martial Arts</data>
+      <data key="v_label">Martial Arts</data>
+    </node>
+    <node id="n26">
+      <data key="v_name">Mecha</data>
+      <data key="v_label">Mecha</data>
+    </node>
+    <node id="n27">
+      <data key="v_name">Military</data>
+      <data key="v_label">Military</data>
+    </node>
+    <node id="n28">
+      <data key="v_name">Modern</data>
+      <data key="v_label">Modern</data>
+    </node>
+    <node id="n29">
+      <data key="v_name">Mystery</data>
+      <data key="v_label">Mystery</data>
+    </node>
+    <node id="n30">
+      <data key="v_name">Mysticism</data>
+      <data key="v_label">Mysticism</data>
+    </node>
+    <node id="n31">
+      <data key="v_name">Near Future</data>
+      <data key="v_label">Near Future</data>
+    </node>
+    <node id="n32">
+      <data key="v_name">Noir</data>
+      <data key="v_label">Noir</data>
+    </node>
+    <node id="n33">
+      <data key="v_name">Oriental</data>
+      <data key="v_label">Oriental</data>
+    </node>
+    <node id="n34">
+      <data key="v_name">Pirate</data>
+      <data key="v_label">Pirate</data>
+    </node>
+    <node id="n35">
+      <data key="v_name">Post-Apocalypse</data>
+      <data key="v_label">Post-Apocalypse</data>
+    </node>
+    <node id="n36">
+      <data key="v_name">Post-Apocalyptic</data>
+      <data key="v_label">Post-Apocalyptic</data>
+    </node>
+    <node id="n37">
+      <data key="v_name">Pulp</data>
+      <data key="v_label">Pulp</data>
+    </node>
+    <node id="n38">
+      <data key="v_name">Relationship</data>
+      <data key="v_label">Relationship</data>
+    </node>
+    <node id="n39">
+      <data key="v_name">Romance</data>
+      <data key="v_label">Romance</data>
+    </node>
+    <node id="n40">
+      <data key="v_name">Romantic</data>
+      <data key="v_label">Romantic</data>
+    </node>
+    <node id="n41">
+      <data key="v_name">Satire</data>
+      <data key="v_label">Satire</data>
+    </node>
+    <node id="n42">
+      <data key="v_name">Science</data>
+      <data key="v_label">Science</data>
+    </node>
+    <node id="n43">
+      <data key="v_name">Shounen</data>
+      <data key="v_label">Shounen</data>
+    </node>
+    <node id="n44">
+      <data key="v_name">Space</data>
+      <data key="v_label">Space</data>
+    </node>
+    <node id="n45">
+      <data key="v_name">Space Opera</data>
+      <data key="v_label">Space Opera</data>
+    </node>
+    <node id="n46">
+      <data key="v_name">Spec Ops</data>
+      <data key="v_label">Spec Ops</data>
+    </node>
+    <node id="n47">
+      <data key="v_name">Splatterpunk</data>
+      <data key="v_label">Splatterpunk</data>
+    </node>
+    <node id="n48">
+      <data key="v_name">Sports</data>
+      <data key="v_label">Sports</data>
+    </node>
+    <node id="n49">
+      <data key="v_name">Steam Punk</data>
+      <data key="v_label">Steam Punk</data>
+    </node>
+    <node id="n50">
+      <data key="v_name">Steampunk</data>
+      <data key="v_label">Steampunk</data>
+    </node>
+    <node id="n51">
+      <data key="v_name">Super Hero</data>
+      <data key="v_label">Super Hero</data>
+    </node>
+    <node id="n52">
+      <data key="v_name">Swashbuckling</data>
+      <data key="v_label">Swashbuckling</data>
+    </node>
+    <node id="n53">
+      <data key="v_name">Sword &amp; Sorcery</data>
+      <data key="v_label">Sword &amp; Sorcery</data>
+    </node>
+    <node id="n54">
+      <data key="v_name">Time Travel</data>
+      <data key="v_label">Time Travel</data>
+    </node>
+    <node id="n55">
+      <data key="v_name">Transhuman</data>
+      <data key="v_label">Transhuman</data>
+    </node>
+    <node id="n56">
+      <data key="v_name">Vampire</data>
+      <data key="v_label">Vampire</data>
+    </node>
+    <node id="n57">
+      <data key="v_name">Vigilante</data>
+      <data key="v_label">Vigilante</data>
+    </node>
+    <node id="n58">
+      <data key="v_name">War</data>
+      <data key="v_label">War</data>
+    </node>
+    <node id="n59">
+      <data key="v_name">Western</data>
+      <data key="v_label">Western</data>
+    </node>
+    <node id="n60">
+      <data key="v_name">Wrestling</data>
+      <data key="v_label">Wrestling</data>
+    </node>
+    <node id="n61">
+      <data key="v_name">Wuxia</data>
+      <data key="v_label">Wuxia</data>
+    </node>
+    <node id="n62">
+      <data key="v_name">Zombie</data>
+      <data key="v_label">Zombie</data>
+    </node>
+    <edge source="n0" target="n9">
+      <data key="e_weight">15</data>
+    </edge>
+    <edge source="n0" target="n22">
+      <data key="e_weight">8</data>
+    </edge>
+    <edge source="n0" target="n25">
+      <data key="e_weight">5</data>
+    </edge>
+    <edge source="n0" target="n61">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n1" target="n16">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n1" target="n37">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n1" target="n41">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n1" target="n58">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n2" target="n43">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n3" target="n16">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n4" target="n16">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n5" target="n48">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n6" target="n35">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n7" target="n16">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n8" target="n22">
+      <data key="e_weight">3</data>
+    </edge>
+    <edge source="n8" target="n38">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n9" target="n23">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n10" target="n17">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n10" target="n22">
+      <data key="e_weight">6</data>
+    </edge>
+    <edge source="n10" target="n42">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n11" target="n14">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n11" target="n20">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n11" target="n22">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n12" target="n16">
+      <data key="e_weight">10</data>
+    </edge>
+    <edge source="n13" target="n31">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n14" target="n22">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n15" target="n16">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n16" target="n17">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n16" target="n19">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n16" target="n20">
+      <data key="e_weight">43</data>
+    </edge>
+    <edge source="n16" target="n22">
+      <data key="e_weight">12</data>
+    </edge>
+    <edge source="n16" target="n23">
+      <data key="e_weight">14</data>
+    </edge>
+    <edge source="n16" target="n24">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n16" target="n28">
+      <data key="e_weight">42</data>
+    </edge>
+    <edge source="n16" target="n32">
+      <data key="e_weight">4</data>
+    </edge>
+    <edge source="n16" target="n33">
+      <data key="e_weight">12</data>
+    </edge>
+    <edge source="n16" target="n34">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n16" target="n36">
+      <data key="e_weight">8</data>
+    </edge>
+    <edge source="n16" target="n37">
+      <data key="e_weight">3</data>
+    </edge>
+    <edge source="n16" target="n40">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n16" target="n42">
+      <data key="e_weight">40</data>
+    </edge>
+    <edge source="n16" target="n44">
+      <data key="e_weight">3</data>
+    </edge>
+    <edge source="n16" target="n49">
+      <data key="e_weight">6</data>
+    </edge>
+    <edge source="n16" target="n51">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n16" target="n53">
+      <data key="e_weight">16</data>
+    </edge>
+    <edge source="n16" target="n59">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n17" target="n20">
+      <data key="e_weight">5</data>
+    </edge>
+    <edge source="n17" target="n22">
+      <data key="e_weight">6</data>
+    </edge>
+    <edge source="n17" target="n23">
+      <data key="e_weight">15</data>
+    </edge>
+    <edge source="n17" target="n27">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n17" target="n28">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n17" target="n37">
+      <data key="e_weight">7</data>
+    </edge>
+    <edge source="n17" target="n42">
+      <data key="e_weight">211</data>
+    </edge>
+    <edge source="n17" target="n45">
+      <data key="e_weight">3</data>
+    </edge>
+    <edge source="n17" target="n54">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n17" target="n55">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n18" target="n35">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n20" target="n22">
+      <data key="e_weight">5</data>
+    </edge>
+    <edge source="n20" target="n29">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n20" target="n39">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n20" target="n42">
+      <data key="e_weight">5</data>
+    </edge>
+    <edge source="n20" target="n51">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n21" target="n33">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n22" target="n23">
+      <data key="e_weight">11</data>
+    </edge>
+    <edge source="n22" target="n28">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n22" target="n37">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n22" target="n42">
+      <data key="e_weight">6</data>
+    </edge>
+    <edge source="n22" target="n47">
+      <data key="e_weight">3</data>
+    </edge>
+    <edge source="n22" target="n56">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n22" target="n58">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n22" target="n59">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n22" target="n62">
+      <data key="e_weight">10</data>
+    </edge>
+    <edge source="n23" target="n35">
+      <data key="e_weight">4</data>
+    </edge>
+    <edge source="n23" target="n42">
+      <data key="e_weight">15</data>
+    </edge>
+    <edge source="n23" target="n51">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n23" target="n56">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n25" target="n33">
+      <data key="e_weight">4</data>
+    </edge>
+    <edge source="n26" target="n51">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n27" target="n42">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n28" target="n42">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n29" target="n58">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n30" target="n42">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n35" target="n50">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n35" target="n62">
+      <data key="e_weight">3</data>
+    </edge>
+    <edge source="n36" target="n59">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n37" target="n42">
+      <data key="e_weight">7</data>
+    </edge>
+    <edge source="n37" target="n52">
+      <data key="e_weight">9</data>
+    </edge>
+    <edge source="n37" target="n60">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n42" target="n45">
+      <data key="e_weight">3</data>
+    </edge>
+    <edge source="n42" target="n54">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n42" target="n55">
+      <data key="e_weight">2</data>
+    </edge>
+    <edge source="n46" target="n58">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n48" target="n60">
+      <data key="e_weight">5</data>
+    </edge>
+    <edge source="n51" target="n57">
+      <data key="e_weight">1</data>
+    </edge>
+    <edge source="n59" target="n61">
+      <data key="e_weight">1</data>
+    </edge>
+  </graph>
+</graphml>
