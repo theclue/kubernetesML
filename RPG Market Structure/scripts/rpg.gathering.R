@@ -7,6 +7,8 @@
 ############################
 # Prerequisites
 #####
+setwd("./RPG Market Structure")
+
 require("tm")
 require("koRpus")
 require("SnowballC")
@@ -25,8 +27,9 @@ require("RWeka")
 
 source("../common/cSplit.R")
 source("../common/s3.loadData.R")
-source("../common/https.loadScript.R")
-source("./scripts/includes/rpg.synonyms.R")
+source("./common/https.loadScript.R")
+
+source("./scripts/rpg.synonyms.R")
 
 #source("http://bioconductor.org/biocLite.R")
 #biocLite("Rgraphviz")
@@ -38,8 +41,8 @@ source("./scripts/includes/rpg.synonyms.R")
 # ---------
 #####
 
-rpg.gathering <- rpg.loadData(file="rpg.gathering.posts.csv.zip", overwrite=FALSE, sep="|", header=T, quote="", stringsAsFactors=FALSE)
-rpg.list <- rpg.loadData(file="rpg.list.csv.zip", overwrite=FALSE, sep="|", header=T, quote="", stringsAsFactors=FALSE)
+rpg.gathering <- s3.loadData(file="rpg.gathering.posts.csv.zip", input.dir="rpg", overwrite=FALSE, sep="|", header=T, quote="", stringsAsFactors=FALSE)
+rpg.list <- s3.loadData(file="rpg.list.csv.zip", overwrite=FALSE, inpit.dir="rpg", sep="|", header=T, quote="", stringsAsFactors=FALSE)
 
 ############################
 # Data Preprocessing
