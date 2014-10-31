@@ -23,9 +23,10 @@ options(mc.cores=1)
 
 require("RWeka")
 
+source("../common/cSplit.R")
+source("../common/s3.loadData.R")
+source("../common/https.loadScript.R")
 source("./scripts/includes/rpg.synonyms.R")
-source("./scripts/includes/cSplit.R")
-source("./scripts/includes/rpg.loadData.R")
 
 #source("http://bioconductor.org/biocLite.R")
 #biocLite("Rgraphviz")
