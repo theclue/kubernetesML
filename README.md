@@ -1,4 +1,4 @@
-machine-lemming
-===============
+kubernetesML
+============
 
-Some open source experiments in Machine Learning, AI, Kaggle competitions
+Some open source experiments in Machine Learning in a dockerized, k8s environment.
